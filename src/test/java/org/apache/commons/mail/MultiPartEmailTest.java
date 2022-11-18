@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class MultiPartEmailTest extends AbstractEmailTest
     {
         // reusable objects to be used across multiple tests
         this.email = new MockMultiPartEmailConcrete();
-        testFile = File.createTempFile("testfile", ".txt");
+        testFile = Files.createTempFile("testfile", ".txt").toFile();
     }
 
     @Test
@@ -326,7 +327,7 @@ public class MultiPartEmailTest extends AbstractEmailTest
         //            resource on windows systems
         // ====================================================================
 
-        final File tmpFile = File.createTempFile("attachment", ".eml");
+        final File tmpFile = Files.createTempFile("attachment", ".eml").toFile();
 
         this.email.attach(
                 new FileDataSource(tmpFile),

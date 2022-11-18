@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -184,7 +185,7 @@ public class ImageHtmlEmailTest extends HtmlEmailTest {
         email.setSubject(strSubject);
         email.setDataSourceResolver(new DataSourceUrlResolver(TEST_IMAGE_DIR.toURI().toURL(), TEST_IS_LENIENT));
 
-        final File file = File.createTempFile("emailtest", ".tst");
+        final File file = Files.createTempFile("emailtest", ".tst").toFile();
         FileUtils.writeStringToFile(file,
                 "just some silly data that we won't be able to display anyway");
 

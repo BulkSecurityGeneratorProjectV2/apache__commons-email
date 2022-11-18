@@ -19,6 +19,7 @@ package org.apache.commons.mail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 
 import javax.mail.internet.MimeUtility;
 
@@ -111,7 +112,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest
         final EmailAttachment attachment = new EmailAttachment();
 
         /** File to used to test file attachments (Must be valid) */
-        final File testFile = File.createTempFile("commons-email-testfile", ".txt");
+        final File testFile = Files.createTempFile("commons-email-testfile", ".txt").toFile();
 
         // ====================================================================
         // Test Success

@@ -25,6 +25,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.activation.DataSource;
@@ -211,7 +212,7 @@ public class HtmlEmailTest extends AbstractEmailTest
         // Test Success
         // ====================================================================
 
-        final File file = File.createTempFile("testEmbedFile", "txt");
+        final File file = Files.createTempFile("testEmbedFile", "txt").toFile();
         file.deleteOnExit();
         final String strEmbed = this.email.embed(file);
         assertNotNull(strEmbed);
@@ -226,7 +227,7 @@ public class HtmlEmailTest extends AbstractEmailTest
                 strEmbed, testCid);
 
         // if we embed a new file, is the content ID unique?
-        final File otherFile = File.createTempFile("testEmbedFile2", "txt");
+        final File otherFile = Files.createTempFile("testEmbedFile2", "txt").toFile();
         otherFile.deleteOnExit();
         final String newCid = this.email.embed(otherFile);
         assertFalse("didn't get unique CID from embedding new file",
@@ -236,7 +237,7 @@ public class HtmlEmailTest extends AbstractEmailTest
     @Test
     public void testEmbedUrlAndFile() throws Exception
     {
-        final File tmpFile = File.createTempFile("testfile", "txt");
+        final File tmpFile = Files.createTempFile("testfile", "txt").toFile();
         tmpFile.deleteOnExit();
         final String fileCid = this.email.embed(tmpFile);
 
@@ -250,7 +251,7 @@ public class HtmlEmailTest extends AbstractEmailTest
     @Test
     public void testEmbedDataSource() throws Exception
     {
-        final File tmpFile = File.createTempFile("testEmbedDataSource", "txt");
+        final File tmpFile = Files.createTempFile("testEmbedDataSource", "txt").toFile();
         tmpFile.deleteOnExit();
         final FileDataSource dataSource = new FileDataSource(tmpFile);
 
@@ -275,7 +276,7 @@ public class HtmlEmailTest extends AbstractEmailTest
                 cid, sameCid);
 
         // does embedding another datasource under the same name fail?
-        final File anotherFile = File.createTempFile("testEmbedDataSource2", "txt");
+        final File anotherFile = Files.createTempFile("testEmbedDataSource2", "txt").toFile();
         anotherFile.deleteOnExit();
         final FileDataSource anotherDS = new FileDataSource(anotherFile);
         try
@@ -298,7 +299,7 @@ public class HtmlEmailTest extends AbstractEmailTest
         final EmailAttachment attachment = new EmailAttachment();
 
         /** File to used to test file attachments (Must be valid) */
-        final File testFile = File.createTempFile("commons-email-testfile", ".txt");
+        final File testFile = Files.createTempFile("commons-email-testfile", ".txt").toFile();
         testFile.deleteOnExit();
 
         // ====================================================================
@@ -700,7 +701,7 @@ public class HtmlEmailTest extends AbstractEmailTest
          // Test Success
          // ====================================================================
 
-         final File file = File.createTempFile("testEmbedFile", "txt");
+         final File file = Files.createTempFile("testEmbedFile", "txt").toFile();
          file.deleteOnExit();
 
          final String testCid = "Test CID";
